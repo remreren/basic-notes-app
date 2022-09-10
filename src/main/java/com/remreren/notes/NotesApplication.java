@@ -1,13 +1,21 @@
 package com.remreren.notes;
 
-import com.remreren.notes.model.Note;
+import com.remreren.notes.handler.CommandlineInputHandler;
+import com.remreren.notes.persistence.NotesPersistence;
 
-import java.util.ArrayList;
 import java.util.Scanner;
 
 public class NotesApplication {
 
-    private final ArrayList<Note> notesMemory = new ArrayList<>();
+    private final CommandlineInputHandler inputHandler;
+    private final NotesPersistence notesPersistence;
+    private final Scanner scanner;
+
+    public NotesApplication() {
+        this.scanner = new Scanner(System.in);
+        this.notesPersistence = new NotesPersistence();
+        this.inputHandler = new CommandlineInputHandler(scanner, notesPersistence);
+    }
 
     public static void main(String[] args) {
         NotesApplication.startApplication();
@@ -24,7 +32,6 @@ public class NotesApplication {
     }
 
     private void mainApplicationLoop() {
-        Scanner scanner = new Scanner(System.in);
 
         while (true) {
             System.out.println("Devam etmek için seçim yapın.");
@@ -37,47 +44,12 @@ public class NotesApplication {
             String choice = scanner.nextLine().trim().toLowerCase();
 
             switch (choice) {
-                case "1" -> createNewNote(scanner);
-                case "2" -> updateNote(scanner);
-                case "3" -> deleteNote(scanner);
-                case "4" -> listNotes();
+                case "1" -> inputHandler.createNote();
+                case "2" -> inputHandler.updateNote();
+                case "3" -> inputHandler.deleteNote();
+                case "4" -> inputHandler.listNotes();
                 case "q" -> System.exit(0);
             }
-        }
-    }
-
-    private void createNewNote(Scanner scanner) {
-        System.out.print("Not başlığını girin:");
-        String title = scanner.nextLine();
-        System.out.print("Not içeriğini girin:");
-        String content = scanner.nextLine();
-        Note newNote = new Note(title, content);
-        notesMemory.add(newNote);
-        System.out.println("Not kaydedildi.");
-    }
-
-    private void updateNote(Scanner scanner) {
-        System.out.print("Not numarasını girin:");
-        int noteIdToUpdate = Integer.parseInt(scanner.nextLine());
-        System.out.println(noteIdToUpdate + "." + notesMemory.get(noteIdToUpdate - 1).toString());
-        System.out.print("Yeni not başlığını girin:");
-        String newTitle = scanner.nextLine();
-        System.out.print("Yeni not içeriğini girin:");
-        String newContent = scanner.nextLine();
-        Note updatedNote = notesMemory.get(noteIdToUpdate - 1).update(newTitle, newContent);
-        notesMemory.set(noteIdToUpdate - 1, updatedNote);
-        System.out.println("Not güncellendi.");
-    }
-
-    private void deleteNote(Scanner scanner) {
-        System.out.print("Not numarasını girin:");
-        int noteIdToDelete = Integer.parseInt(scanner.nextLine());
-        notesMemory.remove(noteIdToDelete - 1);
-    }
-
-    private void listNotes() {
-        for (int i = 0; i < notesMemory.size(); i++) {
-            System.out.println((i + 1) + "." + notesMemory.get(i).toString());
         }
     }
 }
