@@ -1,20 +1,20 @@
 package com.remreren.notes;
 
 import com.remreren.notes.handler.CommandlineInputHandler;
-import com.remreren.notes.persistence.NotesPersistence;
+import com.remreren.notes.persistence.NotesMemoryPersistence;
 
 import java.util.Scanner;
 
 public class NotesApplication {
 
     private final CommandlineInputHandler inputHandler;
-    private final NotesPersistence notesPersistence;
+    private final NotesMemoryPersistence notesMemoryPersistence;
     private final Scanner scanner;
 
     public NotesApplication() {
         this.scanner = new Scanner(System.in);
-        this.notesPersistence = new NotesPersistence();
-        this.inputHandler = new CommandlineInputHandler(scanner, notesPersistence);
+        this.notesMemoryPersistence = new NotesMemoryPersistence();
+        this.inputHandler = new CommandlineInputHandler(scanner, notesMemoryPersistence);
     }
 
     public static void main(String[] args) {

@@ -1,7 +1,7 @@
 package com.remreren.notes.handler;
 
 import com.remreren.notes.model.Note;
-import com.remreren.notes.persistence.NotesPersistence;
+import com.remreren.notes.persistence.NotesMemoryPersistence;
 
 import java.util.Scanner;
 
@@ -9,9 +9,9 @@ public class CommandlineInputHandler {
 
     private final Scanner scanner;
 
-    private final NotesPersistence persistence;
+    private final NotesMemoryPersistence persistence;
 
-    public CommandlineInputHandler(Scanner scanner, NotesPersistence persistence) {
+    public CommandlineInputHandler(Scanner scanner, NotesMemoryPersistence persistence) {
         this.scanner = scanner;
         this.persistence = persistence;
     }

@@ -5,7 +5,7 @@ import com.remreren.notes.model.Note;
 import java.util.ArrayList;
 import java.util.List;
 
-public class NotesPersistence {
+public class NotesMemoryPersistence {
 
     private final List<Note> notesMemory = new ArrayList<>();
 
