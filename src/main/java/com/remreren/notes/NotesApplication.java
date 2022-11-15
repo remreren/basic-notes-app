@@ -28,28 +28,6 @@ public class NotesApplication {
 
     private void start() {
         System.out.println("BasicNotes uygulamasına hoş geldiniz");
-        mainApplicationLoop();
-    }
-
-    private void mainApplicationLoop() {
-
-        while (true) {
-            System.out.println("Devam etmek için seçim yapın.");
-            System.out.println("1. Not ekle");
-            System.out.println("2. Not düzenle");
-            System.out.println("3. Not sil");
-            System.out.println("4. Not listele");
-            System.out.println("q. Çıkış");
-
-            String choice = scanner.nextLine().trim().toLowerCase();
-
-            switch (choice) {
-                case "1" -> inputHandler.createNote();
-                case "2" -> inputHandler.updateNote();
-                case "3" -> inputHandler.deleteNote();
-                case "4" -> inputHandler.listNotes();
-                case "q" -> System.exit(0);
-            }
-        }
+        inputHandler.menu();
     }
 }
